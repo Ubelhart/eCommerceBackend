@@ -1,37 +1,18 @@
 import { Router, json, urlencoded } from "express";
-import { promises as fs } from "fs";
-import isAdmin from "./auth";
+import FileContainer from "../../containers/FileContainer";
+import isAdmin from "../../auth";
 const router = Router();
 
-export default class ApiProducts {
+export default class FileDaoProducts extends FileContainer {
   public router;
-  private products;
-
-  constructor() {
-    this.products = [];
+  constructor(config) {
+    super(config);
     router.use(json());
     router.use(urlencoded({ extended: true }));
 
     this.getProducts();
     this.getProduct();
     this.router = router;
-  }
-
-  private async createIfNotExist() {
-    let file;
-    try {
-      file = await fs.readFile("./products.txt");
-    } catch (error: unknown) {
-      const err = error as any;
-      if (err.code === "ENOENT") {
-        await fs.writeFile("./products.txt", "[]").then(() => {
-          console.log("No existe products.txt. Archivo creado.");
-        });
-        return (file = await fs.readFile("./products.txt"));
-      }
-      console.log("Hubo un error", error);
-    }
-    return file;
   }
 
   private getProducts() {
@@ -59,11 +40,11 @@ export default class ApiProducts {
             newProduct.id = this.products.at(-1).id + 1;
           })
           .finally(() => {
-            newProduct.timestamp = new Date().toISOString();
+            newProduct.timestamp = new Date().toString();
 
             this.products.push(newProduct);
 
-            fs.writeFile("./products.txt", JSON.stringify(this.products));
+            this.fs.writeFile(this.config, JSON.stringify(this.products));
 
             res.json(this.products);
           });
@@ -110,7 +91,7 @@ export default class ApiProducts {
 
               this.products.push(req.body);
 
-              fs.writeFile("./products.txt", JSON.stringify(this.products));
+              this.fs.writeFile(this.config, JSON.stringify(this.products));
 
               return res.json(
                 `El producto con el id:${req.params.id} ha sido actualizado`
@@ -135,7 +116,7 @@ export default class ApiProducts {
                 (product) => product.id !== id
               );
 
-              fs.writeFile("./products.txt", JSON.stringify(this.products));
+              this.fs.writeFile(this.config, JSON.stringify(this.products));
 
               return res.json(
                 `El producto con el id:${req.params.id} ha sido eliminado`

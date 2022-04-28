@@ -1,11 +1,13 @@
 import express from "express";
-import ApiProducts from "./ApiProducts";
-import ApiCart from "./ApiCart";
+import {
+  //mongoDbDaoCarts,
+  //mongoDbDaoProducts,
+  firebaseDaoCarts,
+  firebaseDaoProducts,
+} from "./daos/index";
 const app = express();
-const apiProducts = new ApiProducts();
-const apiCart = new ApiCart();
 
-app.use("/api/productos", apiProducts.router);
-app.use("/api/carrito", apiCart.router);
+app.use("/api/carrito", firebaseDaoCarts.router);
+app.use("/api/productos", firebaseDaoProducts.router);
 
 export default app;

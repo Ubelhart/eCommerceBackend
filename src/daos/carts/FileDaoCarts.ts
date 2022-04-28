@@ -1,14 +1,11 @@
 import { Router, json, urlencoded } from "express";
-import { promises as fs } from "fs";
-import isAdmin from "./auth";
+import FileContainer from "../../containers/FileContainer";
 const router = Router();
 
-export default class ApiCart {
+export default class FileDaoCarts extends FileContainer {
   public router;
-  private carts;
-
-  constructor() {
-    this.carts = [];
+  constructor(config) {
+    super(config);
     router.use(json());
     router.use(urlencoded({ extended: true }));
 
@@ -19,43 +16,25 @@ export default class ApiCart {
     this.router = router;
   }
 
-  private async createIfNotExist() {
-    let file;
-    try {
-      file = await fs.readFile("./carts.txt");
-    } catch (error) {
-      const err = error as any;
-      if (err.code === "ENOENT") {
-        await fs.writeFile("./carts.txt", "[]").then(() => {
-          console.log("No existe carts.txt. Archivo creado.");
-        });
-        file = await fs.readFile("./carts.txt");
-      } else {
-        console.log("Hubo un error", error);
-      }
-    }
-    return file;
-  }
-
   private postCart() {
     router.route("/").post((req, res) => {
       const newCart: any = {
-        timestamp: new Date().toISOString(),
-        product: req.body,
+        timestamp: new Date().toString(),
+        products: req.body,
       };
 
       this.createIfNotExist()
         .then((file) => {
-          this.carts = JSON.parse(file.toString());
+          this.products = JSON.parse(file.toString());
 
-          if (!this.carts.length) {
+          if (!this.products.length) {
             return (newCart.id = 1);
           }
-          newCart.id = this.carts.at(-1).id + 1;
+          newCart.id = this.products.at(-1).id + 1;
         })
         .finally(() => {
-          this.carts.push(newCart);
-          fs.writeFile("./carts.txt", JSON.stringify(this.carts));
+          this.products.push(newCart);
+          this.fs.writeFile("./carts.txt", JSON.stringify(this.products));
 
           res.json(`El carrito con el id:${newCart.id} ha sido agregado`);
         });
@@ -69,14 +48,14 @@ export default class ApiCart {
 
       this.createIfNotExist()
         .then((file) => {
-          this.carts = JSON.parse(file.toString());
+          this.products = JSON.parse(file.toString());
 
-          cart = this.carts.find((cart) => cart.id === id);
+          cart = this.products.find((cart) => cart.id === id);
         })
         .finally(() => {
           if (cart) {
-            this.carts = this.carts.filter((cart) => cart.id !== id);
-            fs.writeFile("./carts.txt", JSON.stringify(this.carts));
+            this.products = this.products.filter((cart) => cart.id !== id);
+            this.fs.writeFile("./carts.txt", JSON.stringify(this.products));
 
             return res.json(
               `El carrito con el id:${req.params.id} ha sido eliminado`
@@ -92,12 +71,18 @@ export default class ApiCart {
       .route("/:id/productos")
       .get((req, res) => {
         const id: number = parseInt(req.params.id);
-        const cart = this.carts.find((cart) => cart.id === id);
+        this.createIfNotExist()
+          .then((file) => {
+            this.products = JSON.parse(file.toString());
+          })
+          .finally(() => {
+            const cart = this.products.find((cart) => cart.id === id);
 
-        if (cart) {
-          return res.json(cart);
-        }
-        res.json({ error: "carrito no encontrado" });
+            if (cart) {
+              return res.json(cart);
+            }
+            res.json({ error: "carrito no encontrado" });
+          });
       })
       .post((req, res) => {
         const id: number = parseInt(req.params.id);
@@ -105,15 +90,15 @@ export default class ApiCart {
 
         this.createIfNotExist()
           .then((file) => {
-            this.carts = JSON.parse(file.toString());
+            this.products = JSON.parse(file.toString());
 
-            cart = this.carts.find((cart) => cart.id === id);
+            cart = this.products.find((cart) => cart.id === id);
           })
           .finally(() => {
             if (cart) {
               cart.products.push(req.body);
 
-              fs.writeFile("./carts.txt", JSON.stringify(this.carts));
+              this.fs.writeFile("./carts.txt", JSON.stringify(this.products));
 
               return res.json(cart);
             }
@@ -130,9 +115,9 @@ export default class ApiCart {
 
       this.createIfNotExist()
         .then((file) => {
-          this.carts = JSON.parse(file.toString());
+          this.products = JSON.parse(file.toString());
 
-          cart = this.carts.find((cart) => cart.id === id && cart.products);
+          cart = this.products.find((cart) => cart.id === id && cart.products);
         })
         .finally(() => {
           if (cart) {
@@ -145,7 +130,7 @@ export default class ApiCart {
                 (product) => product.id !== id_prod
               );
 
-              fs.writeFile("./carts.txt", JSON.stringify(this.carts));
+              this.fs.writeFile("./carts.txt", JSON.stringify(this.products));
 
               return res.json(
                 `El producto con el id:${id_prod} ha sido eliminado`

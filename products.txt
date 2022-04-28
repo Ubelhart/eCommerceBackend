@@ -1,1 +1,29 @@
-[{"timestamp":"2022-04-05T05:08:20.551Z","title":"Escuadra","description":"Escuadra de madera","thumbnail":"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png","price":123.45,"stock":10,"id":1},{"id":2,"timestamp":"2022-04-05T05:08:20.551Z","title":"Calculadora","description":"Calculadora de plástico","thumbnail":"https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png","price":234.56,"stock":20},{"id":3,"timestamp":"2022-04-05T05:08:20.551Z","title":"Globo Terráqueo","description":"Globo terráqueo de plástico","thumbnail":"https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png","price":345.67,"stock":30}]
+[
+  {
+    "timestamp": "2022-04-05T05:08:20.551Z",
+    "title": "Escuadra",
+    "description": "Escuadra de madera",
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
+    "price": 123.45,
+    "stock": 10,
+    "id": 1
+  },
+  {
+    "id": 2,
+    "timestamp": "2022-04-05T05:08:20.551Z",
+    "title": "Calculadora",
+    "description": "Calculadora de plástico",
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png",
+    "price": 234.56,
+    "stock": 20
+  },
+  {
+    "id": 3,
+    "timestamp": "2022-04-05T05:08:20.551Z",
+    "title": "Globo Terráqueo",
+    "description": "Globo terráqueo de plástico",
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png",
+    "price": 345.67,
+    "stock": 30
+  }
+]
