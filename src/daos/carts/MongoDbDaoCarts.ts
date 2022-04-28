@@ -8,6 +8,7 @@ export default class MongoDbDaoCarts extends MongoDbContainer {
     super(config);
     router.use(json());
     router.use(urlencoded({ extended: true }));
+    this.connect();
     this.postCart();
     this.deleteCart();
     this.getCart();
@@ -20,11 +21,13 @@ export default class MongoDbDaoCarts extends MongoDbContainer {
       const newCart = new Cart();
       await newCart.save((err, cart) => {
         if (err) {
-          return res.json({ error: "no se pudo insertar el carrito" });
+          console.log("Error al crear el carrito", err);
+        } else if (Object.keys(req.body).length === 0) {
+          return res.json({ error: "no puedes crear un carrito vació" });
         }
         cart.products = req.body;
         cart.save();
-        res.json(cart);
+        res.json(`El carrito con el id:${cart._id} ha sido creado`);
       });
     });
   }
@@ -36,6 +39,8 @@ export default class MongoDbDaoCarts extends MongoDbContainer {
           return res.json(
             `El carrito con el id:${req.params.id} ha sido eliminado`
           );
+        } else if (err) {
+          console.log("Error al eliminar el carrito", err);
         }
         res.json({ error: "carrito no encontrado" });
       });
@@ -48,6 +53,7 @@ export default class MongoDbDaoCarts extends MongoDbContainer {
       .get((req, res) => {
         Cart.findById(req.params.id, (err, cart) => {
           if (err) {
+            console.log(err);
             return res.json({ error: "carrito no encontrado" });
           }
           res.json(cart.products);
@@ -56,6 +62,7 @@ export default class MongoDbDaoCarts extends MongoDbContainer {
       .post((req, res) => {
         Cart.findById(req.params.id, (err, cart) => {
           if (err) {
+            console.log(err);
             return res.json({ error: "carrito no encontrado" });
           }
           cart.products.push(req.body);
@@ -72,6 +79,7 @@ export default class MongoDbDaoCarts extends MongoDbContainer {
         { $pull: { products: { _id: req.params.id_prod } } },
         (err, cart) => {
           if (err) {
+            console.log(err);
             return res.json({ error: "carrito no encontrado" });
           }
           const product = cart.products.find(

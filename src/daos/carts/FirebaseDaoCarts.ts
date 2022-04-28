@@ -59,10 +59,10 @@ export default class FirebaseDaoCarts extends FirebaseContainer {
           }
           res.json({ error: "carrito no encontrado" });
         } catch (error) {
-          console.log(error);
+          console.log("Error al eliminar el carrito", error);
         }
       } catch (error) {
-        console.log(error);
+        console.log("Error al obtener los datos del carrito", error);
       }
     });
   }
@@ -83,7 +83,7 @@ export default class FirebaseDaoCarts extends FirebaseContainer {
           }
           res.json("El carrito esta vació");
         } catch (error) {
-          console.log(error);
+          console.log("Error al obtener los datos del carrito", error);
         }
       })
       .post(async (req, res) => {
@@ -99,10 +99,10 @@ export default class FirebaseDaoCarts extends FirebaseContainer {
             }
             res.json({ error: "carrito no encontrado" });
           } catch (error) {
-            console.log(error);
+            console.log("Error insertar el producto", error);
           }
         } catch (error) {
-          console.log(error);
+          console.log("Error al obtener los datos del carrito", error);
         }
       });
   }
@@ -135,10 +135,10 @@ export default class FirebaseDaoCarts extends FirebaseContainer {
           }
           res.json({ error: "carrito no encontrado" });
         } catch (error) {
-          console.log(error);
+          console.log("Error al eliminar el producto", error);
         }
       } catch (error) {
-        console.log(error);
+        console.log("Error al obtener los datos del carrito", error);
       }
     });
   }

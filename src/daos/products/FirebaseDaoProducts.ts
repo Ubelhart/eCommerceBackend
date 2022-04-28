@@ -30,7 +30,7 @@ export default class FirebaseDaoProducts extends FirebaseContainer {
           }
           res.json({ error: "no se encontraron productos" });
         } catch (error) {
-          console.log(error);
+          console.log("Error al obtener productos", error);
         }
       })
       .post(isAdmin, async (req, res) => {
@@ -61,7 +61,7 @@ export default class FirebaseDaoProducts extends FirebaseContainer {
           }
           res.json({ error: "producto no encontrado" });
         } catch (error) {
-          console.log(error);
+          console.log("Error al obtener producto", error);
         }
       })
       .put(isAdmin, async (req, res) => {
@@ -79,11 +79,21 @@ export default class FirebaseDaoProducts extends FirebaseContainer {
       .delete(isAdmin, async (req, res) => {
         try {
           const doc = this.query.doc(req.params.id);
-          await doc.delete();
-          res.json(`El producto con el id:${req.params.id} ha sido eliminado`);
+          const product = await doc.get();
+          const response = { id: doc.id, ...product.data() };
+          try {
+            if (response.title) {
+              await doc.delete();
+              res.json(
+                `El producto con el id:${req.params.id} ha sido eliminado`
+              );
+            }
+            res.json({ error: "producto no encontrado" });
+          } catch (error) {
+            console.log("Error al eliminar producto", error);
+          }
         } catch (error) {
-          console.log(error);
-          res.json({ error: "producto no encontrado" });
+          console.log("Error al obtener producto", error);
         }
       });
   }

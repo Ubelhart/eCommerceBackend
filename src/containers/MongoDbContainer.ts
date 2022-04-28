@@ -8,7 +8,11 @@ export default class MongoDbContainer {
   }
 
   public async connect() {
-    await mongoose.connect(this.config);
-    console.log("MongoDB connected");
+    try {
+      await mongoose.connect(this.config);
+      console.log("MongoDB connected");
+    } catch (error) {
+      console.log("MongoDB connection error", error);
+    }
   }
 }
