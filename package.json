@@ -20,8 +20,13 @@
   },
   "dependencies": {
     "@types/express": "^4.17.13",
+    "@vscode/sqlite3": "^5.0.8",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "firebase-admin": "^10.1.0",
-    "mongoose": "^6.3.1"
+    "knex": "^2.0.0",
+    "mongoose": "^6.3.1",
+    "mysql": "^2.18.1",
+    "sqlite3": "^5.0.6"
   }
 }

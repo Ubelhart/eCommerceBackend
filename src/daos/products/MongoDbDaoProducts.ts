@@ -21,7 +21,8 @@ export default class MongoDbDaoProducts extends MongoDbContainer {
       .get((req, res) => {
         Product.find({}, (err, products) => {
           if (err) {
-            res.send(err);
+            console.log(err);
+            res.send({ error: "productos no encontrados" });
           }
           res.json(products);
         });
