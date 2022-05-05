@@ -5,7 +5,7 @@ export default class FileContainer {
   public fs;
   public products;
 
-  constructor(config) {
+  constructor(config: string) {
     this.config = config;
     this.fs = fs;
     this.products = [];
@@ -14,9 +14,8 @@ export default class FileContainer {
     let file;
     try {
       file = await fs.readFile(this.config);
-    } catch (error: unknown) {
-      const err = error as any;
-      if (err.code === "ENOENT") {
+    } catch (error: any) {
+      if (error.code === "ENOENT") {
         await fs.writeFile(this.config, "[]").then(() => {
           console.log(`No existe ${this.config}. Archivo creado.`);
         });

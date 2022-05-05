@@ -4,7 +4,6 @@ export default class FirebaseContainer {
   private config;
   public db;
   public admin;
-  public router;
   public query;
   constructor(config) {
     this.config = config;

@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 export default class MongoDbContainer {
   private config;
-  public router;
   constructor(config) {
     this.config = config;
   }
