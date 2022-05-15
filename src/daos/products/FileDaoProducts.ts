@@ -1,116 +1,63 @@
-import FileContainer from "../../containers/FileContainer";
+import FileContainer from '../../containers/FileContainer'
+import { IProductFile } from '../../interfaces/Product'
 
 export default class FileDaoProducts extends FileContainer {
-  constructor(config) {
-    super(config);
-
-    this.getProduct = this.getProduct.bind(this);
-    this.postProduct = this.postProduct.bind(this);
-    this.putProduct = this.putProduct.bind(this);
-    this.deleteProduct = this.deleteProduct.bind(this);
-    this.getProducts = this.getProducts.bind(this);
+  constructor(config: string) {
+    super(config)
   }
 
-  public getProducts(req, res) {
-    this.createIfNotExist()
-      .then((file) => {
-        this.products = JSON.parse(file.toString());
-      })
-      .finally(() => {
-        res.json(this.products);
-      });
+  public async getProducts() {
+    const products = await this.createIfNotExist()
+    if (products) {
+      return JSON.parse(products.toString())
+    }
+    return products
   }
 
-  public postProduct(req, res) {
-    const newProduct = req.body;
+  public async postProduct(newProduct: IProductFile) {
+    const products: IProductFile[] = await this.getProducts()
 
-    this.createIfNotExist()
-      .then((file) => {
-        this.products = JSON.parse(file.toString());
-
-        if (!this.products.length) {
-          return (newProduct.id = 1);
-        }
-        newProduct.id = this.products.at(-1).id + 1;
-      })
-      .finally(() => {
-        newProduct.timestamp = new Date().toString();
-
-        this.products.push(newProduct);
-
-        this.fs.writeFile(this.config, JSON.stringify(this.products));
-
-        res.json(this.products);
-      });
+    if (!products.length) {
+      newProduct.id = 1
+    } else {
+      newProduct.id = products[products.length - 1].id + 1
+    }
+    newProduct.timestamp = new Date().toString()
+    products.push(newProduct)
+    await this.fs.writeFile(this.config, JSON.stringify(products))
+    return newProduct
   }
 
-  public getProduct(req, res) {
-    const id: number = parseInt(req.params.id);
-    let product;
-    req.query.admin;
-    this.createIfNotExist()
-      .then((file) => {
-        this.products = JSON.parse(file.toString());
+  public async getProduct(id: string) {
+    const parseId: number = parseInt(id)
+    const products: IProductFile[] = await this.getProducts()
 
-        product = this.products.find((product) => product.id === id);
-      })
-      .finally(() => {
-        if (product) {
-          return res.json(product);
-        }
-        res.json({ error: "producto no encontrado" });
-      });
+    return products.find((product) => product.id === parseId)
   }
 
-  public putProduct(req, res) {
-    const id: number = parseInt(req.params.id);
-    let product;
+  public async putProduct(id: string, updatedProduct: IProductFile) {
+    const parseId: number = parseInt(id)
+    const products: IProductFile[] = await this.getProducts()
+    const filteredProducts = products.filter(
+      (product) => product.id !== parseId
+    )
 
-    this.createIfNotExist()
-      .then((file) => {
-        this.products = JSON.parse(file.toString());
+    updatedProduct.id = parseId
+    filteredProducts.push(updatedProduct)
 
-        product = this.products.find((product) => product.id === id);
-      })
-      .finally(() => {
-        if (product) {
-          this.products = this.products.filter((product) => product.id !== id);
+    await this.fs.writeFile(this.config, JSON.stringify(filteredProducts))
 
-          req.body.id = id;
-
-          this.products.push(req.body);
-
-          this.fs.writeFile(this.config, JSON.stringify(this.products));
-
-          return res.json(
-            `El producto con el id:${req.params.id} ha sido actualizado`
-          );
-        }
-        res.json({ error: "producto no encontrado" });
-      });
+    return updatedProduct
   }
 
-  public deleteProduct(req, res) {
-    const id: number = parseInt(req.params.id);
-    let product;
+  public async deleteProduct({ id }: { id: string }) {
+    const parseId: number = parseInt(id)
+    const products: IProductFile[] = await this.getProducts()
 
-    this.createIfNotExist()
-      .then((file) => {
-        this.products = JSON.parse(file.toString());
+    const filteredProducts = products.filter(
+      (product) => product.id !== parseId
+    )
 
-        product = this.products.find((product) => product.id === id);
-      })
-      .finally(() => {
-        if (product) {
-          this.products = this.products.filter((product) => product.id !== id);
-
-          this.fs.writeFile(this.config, JSON.stringify(this.products));
-
-          return res.json(
-            `El producto con el id:${req.params.id} ha sido eliminado`
-          );
-        }
-        res.json({ error: "producto no encontrado" });
-      });
+    this.fs.writeFile(this.config, JSON.stringify(filteredProducts))
   }
 }

@@ -1,131 +1,75 @@
-import FileContainer from "../../containers/FileContainer";
+import FileContainer from '../../containers/FileContainer'
+import { IProductFile } from '../../interfaces/Product'
+import { ICartFile } from '../../interfaces/Cart'
 
 export default class FileDaoCarts extends FileContainer {
   constructor(config: string) {
-    super(config);
-
-    this.postCart = this.postCart.bind(this);
-    this.deleteCart = this.deleteCart.bind(this);
-    this.getCart = this.getCart.bind(this);
-    this.postProduct = this.postProduct.bind(this);
-    this.deleteProduct = this.deleteProduct.bind(this);
+    super(config)
   }
 
-  public postCart(req, res) {
+  public async getCarts() {
+    const products = await this.createIfNotExist()
+    if (products) {
+      return JSON.parse(products.toString())
+    }
+    return products
+  }
+
+  public async getCart(id: string) {
+    const carts: ICartFile[] = await this.getCarts()
+    const parseId: number = parseInt(id)
+
+    return carts.find((cart) => cart.id === parseId)
+  }
+
+  public async postCart(newProducts: IProductFile[]) {
+    const carts: ICartFile[] = await this.getCarts()
     const newCart: any = {
       timestamp: new Date().toString(),
-      products: req.body,
-    };
+      products: newProducts
+    }
 
-    this.createIfNotExist()
-      .then((file) => {
-        this.products = JSON.parse(file.toString());
-
-        if (!this.products.length) {
-          return (newCart.id = 1);
-        }
-        newCart.id = this.products.at(-1).id + 1;
-      })
-      .finally(() => {
-        this.products.push(newCart);
-        this.fs.writeFile("./carts.txt", JSON.stringify(this.products));
-
-        res.json(`El carrito con el id:${newCart.id} ha sido agregado`);
-      });
+    if (!carts.length) {
+      newCart.id = 1
+    } else {
+      newCart.id = carts[carts.length - 1].id + 1
+    }
+    carts.push(newCart)
+    await this.fs.writeFile(this.config, JSON.stringify(carts))
+    return newCart
   }
 
-  public deleteCart(req, res) {
-    const id: number = parseInt(req.params.id);
-    let cart;
+  public async deleteCart({ id }: { id: string }) {
+    const carts: ICartFile[] = await this.getCarts()
+    const parseId: number = parseInt(id)
 
-    this.createIfNotExist()
-      .then((file) => {
-        this.products = JSON.parse(file.toString());
-
-        cart = this.products.find((cart) => cart.id === id);
-      })
-      .finally(() => {
-        if (cart) {
-          this.products = this.products.filter((cart) => cart.id !== id);
-          this.fs.writeFile("./carts.txt", JSON.stringify(this.products));
-
-          return res.json(
-            `El carrito con el id:${req.params.id} ha sido eliminado`
-          );
-        }
-        res.json({ error: "carrito no encontrado" });
-      });
+    const filteredCarts = carts.filter((cart) => cart.id !== parseId)
+    this.fs.writeFile(this.config, JSON.stringify(filteredCarts))
   }
 
-  public getCart(req, res) {
-    const id: number = parseInt(req.params.id);
-    this.createIfNotExist()
-      .then((file) => {
-        this.products = JSON.parse(file.toString());
-      })
-      .finally(() => {
-        const cart = this.products.find((cart) => cart.id === id);
-
-        if (cart) {
-          return res.json(cart);
-        }
-        res.json({ error: "carrito no encontrado" });
-      });
+  public async postProduct(cart: ICartFile, newProduct: IProductFile | any) {
+    const carts: ICartFile[] = await this.getCarts()
+    const foundCart = carts.find((elem) => elem.id === cart.id)
+    if (foundCart) {
+      foundCart.products.push(newProduct)
+      await this.fs.writeFile(this.config, JSON.stringify(carts))
+      newProduct = cart.products.find((product) => product.id === newProduct.id)
+      return newProduct
+    }
+    return null
   }
 
-  public postProduct(req, res) {
-    const id: number = parseInt(req.params.id);
-    let cart;
+  public async deleteProduct(cart: ICartFile, id_prod: string) {
+    const carts: ICartFile[] = await this.getCarts()
+    const parseId_prod: number = parseInt(id_prod)
 
-    this.createIfNotExist()
-      .then((file) => {
-        this.products = JSON.parse(file.toString());
+    const foundCart = carts.find((elem) => elem.id === cart.id)
 
-        cart = this.products.find((cart) => cart.id === id);
-      })
-      .finally(() => {
-        if (cart) {
-          cart.products.push(req.body);
-
-          this.fs.writeFile("./carts.txt", JSON.stringify(this.products));
-
-          return res.json(cart);
-        }
-        res.json({ error: "carrito no encontrado" });
-      });
-  }
-
-  public deleteProduct(req, res) {
-    const id: number = parseInt(req.params.id);
-    const id_prod: number = parseInt(req.params.id_prod);
-    let cart;
-
-    this.createIfNotExist()
-      .then((file) => {
-        this.products = JSON.parse(file.toString());
-
-        cart = this.products.find((cart) => cart.id === id && cart.products);
-      })
-      .finally(() => {
-        if (cart) {
-          const product = cart.products.find(
-            (product) => product.id === id_prod
-          );
-
-          if (product) {
-            cart.products = cart.products.filter(
-              (product) => product.id !== id_prod
-            );
-
-            this.fs.writeFile("./carts.txt", JSON.stringify(this.products));
-
-            return res.json(
-              `El producto con el id:${id_prod} ha sido eliminado`
-            );
-          }
-          return res.json({ error: "producto no encontrado" });
-        }
-        res.json({ error: "carrito no encontrado" });
-      });
+    if (foundCart) {
+      foundCart.products.filter((product) => product.id !== parseId_prod)
+      this.fs.writeFile(this.config, JSON.stringify(carts))
+      return true
+    }
+    return false
   }
 }

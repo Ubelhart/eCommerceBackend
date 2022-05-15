@@ -1,19 +1,52 @@
-import FileDaoCarts from "./carts/FileDaoCarts";
-import FileDaoProducts from "./products/FileDaoProducts";
-import MongoDbDaoCarts from "./carts/MongoDbDaoCarts";
-import MongoDbDaoProducts from "./products/MongoDbDaoProducts";
-import FirebaseDaoCarts from "./carts/FirebaseDaoCarts";
-import FirebaseDaoProducts from "./products/FirebaseDaoProducts";
-import Sqlite3DaoCarts from "./carts/Sqlite3DaoCarts";
-import MariaDbDaoProducts from "./products/MariaDbDaoProducts";
+import 'dotenv/config'
+import { mongoDbKey, mariadb, sqlite3 } from '../config'
+import serviceAccount from '../../db/backendecommerce-dec6c-firebase-adminsdk-hm6xm-aef48c2fd1.json'
+let daoCarts
+let daoProducts
+switch (process.env.DB) {
+  case 'mariaSql':
+    import('./carts/Sqlite3DaoCarts').then(({ default: Sqlite3DaoCarts }) => {
+      daoCarts = new Sqlite3DaoCarts(sqlite3)
+    })
+    import('./products/MariaDbDaoProducts').then(
+      ({ default: MariaDbDaoProducts }) => {
+        daoProducts = new MariaDbDaoProducts(mariadb)
+      }
+    )
+    break
 
-export {
-  FileDaoCarts,
-  FileDaoProducts,
-  MongoDbDaoCarts,
-  MongoDbDaoProducts,
-  FirebaseDaoCarts,
-  FirebaseDaoProducts,
-  Sqlite3DaoCarts,
-  MariaDbDaoProducts,
-};
+  case 'mongoDb':
+    import('./carts/MongoDbDaoCarts').then(({ default: MongoDbDaoCarts }) => {
+      daoCarts = new MongoDbDaoCarts(mongoDbKey)
+    })
+    import('./products/MongoDbDaoProducts').then(
+      ({ default: MongoDbDaoProducts }) => {
+        daoProducts = new MongoDbDaoProducts(mongoDbKey)
+      }
+    )
+    break
+
+  case 'firebase':
+    import('./carts/FirebaseDaoCarts').then(({ default: FirebaseDaoCarts }) => {
+      daoCarts = new FirebaseDaoCarts(serviceAccount)
+    })
+    import('./products/FirebaseDaoProducts').then(
+      ({ default: FirebaseDaoProducts }) => {
+        daoProducts = new FirebaseDaoProducts(serviceAccount)
+      }
+    )
+    break
+
+  default:
+    import('./carts/FileDaoCarts').then(({ default: FileDaoCarts }) => {
+      daoCarts = new FileDaoCarts('carts.json')
+    })
+    import('./products/FileDaoProducts').then(
+      ({ default: FileDaoProducts }) => {
+        daoProducts = new FileDaoProducts('products.json')
+      }
+    )
+    break
+}
+
+export { daoCarts, daoProducts }

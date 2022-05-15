@@ -1,59 +1,30 @@
-import MongoDbContainer from "../../containers/MongoDbContainer";
-import { Product } from "../../models/products";
+import MongoDbContainer from '../../containers/MongoDbContainer'
+import { Product } from '../../models/products'
+import { IProductMongo } from '../../interfaces/Product'
 
 export default class MongoDbDaoProducts extends MongoDbContainer {
-  constructor(config) {
-    super(config);
-
-    this.getProduct = this.getProduct.bind(this);
-    this.postProduct = this.postProduct.bind(this);
-    this.putProduct = this.putProduct.bind(this);
-    this.deleteProduct = this.deleteProduct.bind(this);
-    this.getProducts = this.getProducts.bind(this);
+  constructor(config: string) {
+    super(config)
   }
 
-  public getProducts(req, res) {
-    Product.find({}, (err, products) => {
-      if (err) {
-        console.log(err);
-        res.send({ error: "productos no encontrados" });
-      }
-      res.json(products);
-    });
+  public async getProducts() {
+    return await Product.find({})
   }
 
-  public async postProduct(req, res) {
-    const newProduct = new Product(req.body);
-    await newProduct.save();
-    res.json(newProduct);
+  public async postProduct(newProduct: IProductMongo) {
+    const newProductModel = new Product(newProduct)
+    return await newProductModel.save()
   }
 
-  public getProduct(req, res) {
-    Product.findById(req.params.id, (err, product) => {
-      if (err) {
-        return res.json({ error: "producto no encontrado" });
-      }
-      res.json(product);
-    });
+  public async getProduct(id: string) {
+    return await Product.findById(id)
   }
 
-  public putProduct(req, res) {
-    Product.findByIdAndUpdate(req.params.id, req.body, (err) => {
-      if (err) {
-        return res.json({ error: "producto no encontrado" });
-      }
-      res.json(`El producto con el id:${req.params.id} ha sido actualizado`);
-    });
+  public async putProduct(id: string, updatedProduct: IProductMongo) {
+    return await Product.findByIdAndUpdate(id, updatedProduct)
   }
 
-  public deleteProduct(req, res) {
-    Product.findByIdAndRemove(req.params.id, (err, cart) => {
-      if (cart) {
-        return res.json(
-          `El producto con el id:${req.params.id} ha sido eliminado`
-        );
-      }
-      res.json({ error: "producto no encontrado" });
-    });
+  public async deleteProduct({ id }: { id: string }) {
+    return await Product.findByIdAndRemove(id)
   }
 }

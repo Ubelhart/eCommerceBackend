@@ -5,16 +5,23 @@
   "main": "dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "watch:build": "webpack --watch",
+    "watch:server": "nodemon .",
     "build": "webpack",
-    "start": "node ."
+    "lint": "ts-standard",
+    "start": "node .",
+    "watch": "npm-run-all --parallel watch:build watch:server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "nodemon": "^2.0.16",
+    "npm-run-all": "^4.1.5",
     "ts-loader": "^9.2.8",
+    "ts-standard": "^11.0.0",
     "typescript": "^4.6.3",
-    "webpack": "^5.71.0",
+    "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2",
     "webpack-node-externals": "^3.0.0"
   },
@@ -28,5 +35,19 @@
     "mongoose": "^6.3.1",
     "mysql": "^2.18.1",
     "sqlite3": "^5.0.6"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "extends": [
+      "./node_modules/ts-standard/eslintrc.json"
+    ],
+    "rule": {
+      "space-before-function-paren": "off",
+      "@typescript-eslint/space-before-function-paren": [
+        "error"
+      ]
+    }
   }
 }

@@ -1,8 +1,8 @@
-import knex from "knex";
+import knex from 'knex'
 
 export default class MariaDbAndSqliteContainer {
-  public knex;
+  public knex
   constructor(config) {
-    this.knex = knex(config);
+    this.knex = knex(config)
   }
 }

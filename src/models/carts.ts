@@ -1,11 +1,12 @@
-import mongoose from "mongoose";
-import { productSchema } from "./products";
+import mongoose from 'mongoose'
+import { productSchema } from './products'
+import { ICartMongo } from '../interfaces/Cart'
 
-const cartsCollection = "carts";
+const cartsCollection = 'carts'
 
-const cartSchema = new mongoose.Schema({
+const cartSchema = new mongoose.Schema<ICartMongo>({
   products: [productSchema],
-  timestamp: { type: Date, default: Date.now },
-});
+  timestamp: { type: String, default: new Date().toString() }
+})
 
-export const Cart = mongoose.model(cartsCollection, cartSchema);
+export const Cart = mongoose.model(cartsCollection, cartSchema)
