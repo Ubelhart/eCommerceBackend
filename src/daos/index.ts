@@ -1,6 +1,5 @@
 import 'dotenv/config'
-import { mongoDbKey, mariadb, sqlite3 } from '../config'
-import serviceAccount from '../../db/backendecommerce-dec6c-firebase-adminsdk-hm6xm-aef48c2fd1.json'
+import { mongoDbKey, mariadb, sqlite3, serviceAccount } from '../config'
 let daoCarts
 let daoProducts
 switch (process.env.DB) {

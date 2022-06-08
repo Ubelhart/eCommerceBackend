@@ -1,7 +1,10 @@
-import app from "./src/app";
+import app from './src/app'
+import parseArgs from 'minimist'
 
-const PORT = process.env.PORT || 8080;
+const args = parseArgs(process.argv.slice(2))
+
+const PORT = args._[0] || 8080
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+  console.log(`Servidor corriendo en http://localhost:${PORT}`)
+})
