@@ -1,0 +1,6 @@
+nodemon main.js 3000 CLUSTER
+nodemon main.js 3000 FORK
+forever start ./dist/main.js 3000 CLUSTER
+forever start ./dist/main.js 3000 FORK
+pm2 start ./dist/main.js --name="FORK" --watch -i max -- 8081
+pm2 start ./dist/main.js --name="CLUSTER" --watch -i max -- 8082

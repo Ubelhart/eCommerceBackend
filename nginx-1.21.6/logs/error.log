@@ -1,0 +1,39 @@
+2022/06/09 21:06:26 [error] 15952#8188: *1 CreateFile() "C:\nginx-1.21.6/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2022/06/16 20:45:40 [error] 6204#7660: *1 CreateFile() "C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2022/06/16 21:33:26 [emerg] 15124#11180: directive "server_name" is not terminated by ";" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:48
+2022/06/16 21:33:26 [alert] 17256#6472: worker process 15124 exited with code 1
+2022/06/16 21:33:26 [alert] 17256#6472: could not respawn worker
+2022/06/16 21:51:38 [emerg] 8660#20520: directive "server_name" is not terminated by ";" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:48
+2022/06/16 21:53:05 [emerg] 1440#3628: directive "server_name" is not terminated by ";" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:48
+2022/06/16 22:02:33 [emerg] 9724#15712: directive "server_name" is not terminated by ";" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:48
+2022/06/16 22:03:00 [emerg] 9556#4288: directive "server_name" is not terminated by ";" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:48
+2022/06/16 22:05:57 [emerg] 2252#19500: directive "server_name" is not terminated by ";" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:48
+2022/06/16 22:09:19 [emerg] 20256#8056: directive "server_name" is not terminated by ";" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:48
+2022/06/16 22:09:42 [emerg] 20532#20912: directive "server_name" is not terminated by ";" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:48
+2022/06/16 22:09:50 [emerg] 8064#13024: directive "server_name" is not terminated by ";" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:48
+2022/06/16 22:10:16 [emerg] 18948#19640: directive "server_name" is not terminated by ";" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:48
+2022/06/16 22:10:57 [emerg] 19744#19096: unexpected "}" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:52
+2022/06/16 22:11:17 [emerg] 10968#18640: unexpected "}" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:52
+2022/06/16 22:11:50 [notice] 17312#19768: signal process started
+2022/06/16 22:11:50 [error] 17312#19768: OpenEvent("Global\ngx_quit_17256") failed (2: The system cannot find the file specified)
+2022/06/16 22:12:01 [notice] 11344#19880: signal process started
+2022/06/16 22:12:01 [error] 11344#19880: OpenEvent("Global\ngx_quit_17256") failed (2: The system cannot find the file specified)
+2022/06/16 22:12:23 [error] 11552#20464: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8082/", host: "localhost"
+2022/06/16 22:12:25 [error] 11552#20464: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8081/", host: "localhost"
+2022/06/16 22:12:30 [error] 11552#20464: *1 no live upstreams while connecting to upstream, client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", upstream: "http://node_app/", host: "localhost"
+2022/06/16 22:12:46 [error] 11552#20464: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8081/", host: "localhost"
+2022/06/16 22:12:48 [error] 11552#20464: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8082/", host: "localhost"
+2022/06/16 22:13:06 [error] 11552#20464: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8081/", host: "localhost"
+2022/06/16 22:13:08 [error] 11552#20464: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8082/", host: "localhost"
+2022/06/16 22:13:34 [notice] 19092#18760: signal process started
+2022/06/16 22:13:49 [error] 10048#14016: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8082/", host: "localhost"
+2022/06/16 22:13:52 [error] 10048#14016: *3 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8081/", host: "localhost"
+2022/06/16 22:13:52 [error] 10048#14016: *3 no live upstreams while connecting to upstream, client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", upstream: "http://node_app/", host: "localhost"
+2022/06/16 22:14:50 [error] 10048#14016: *3 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8081/", host: "localhost"
+2022/06/16 22:17:57 [notice] 16420#7280: signal process started
+2022/06/16 22:22:26 [error] 17752#14952: *1 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: nginx_mode, request: "GET /api/randoms HTTP/1.1", upstream: "http://127.0.0.1:8081/api/randoms", host: "localhost"
+2022/06/16 22:25:25 [emerg] 11976#6352: directive "root" is not terminated by ";" in C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/conf/nginx.conf:51
+2022/06/16 22:25:33 [notice] 20244#17704: signal process started
+2022/06/16 22:25:38 [error] 20764#10288: *5 "C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/../public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", host: "localhost"
+2022/06/16 22:25:39 [error] 20764#10288: *5 "C:\Users\juanp\OneDrive\Escritorio\Backend 20645\eCommerceBackend\nginx-1.21.6/../public/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: nginx_mode, request: "GET / HTTP/1.1", host: "localhost"
+2022/06/16 22:27:25 [notice] 16624#20040: signal process started
