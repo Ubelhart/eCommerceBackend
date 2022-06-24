@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { daoProducts } from '../daos'
+import { logger } from '../app'
 
 export default class ProductsController {
   constructor() {
@@ -22,6 +23,7 @@ export default class ProductsController {
           error: `el producto con el id:${req.params.id} no existe`
         })
       } catch (error: any) {
+        logger.error(error.message)
         return res.status(500).json({ message: error.message })
       }
     } else {
@@ -33,6 +35,7 @@ export default class ProductsController {
         }
         return res.json({ error: 'no hay productos' })
       } catch (error: any) {
+        logger.error(error.message)
         return res.status(500).json({ message: error.message })
       }
     }
@@ -49,6 +52,7 @@ export default class ProductsController {
         error: `el producto con el id:${req.params.id} no existe`
       })
     } catch (error: any) {
+      logger.error(error.message)
       return res.status(500).json({ message: error.message })
     }
   }
@@ -63,6 +67,7 @@ export default class ProductsController {
       }
       return res.json({ error: 'no se pudo crear el producto' })
     } catch (error: any) {
+      logger.error(error.message)
       return res.status(500).json({ message: error.message })
     }
   }
@@ -84,6 +89,7 @@ export default class ProductsController {
         error: `el producto con el id:${req.params.id} no existe`
       })
     } catch (error: any) {
+      logger.error(error.message)
       return res.status(500).json({ message: error.message })
     }
   }
@@ -100,6 +106,7 @@ export default class ProductsController {
         error: `el producto con el id:${req.params.id} no existe`
       })
     } catch (error: any) {
+      logger.error(error.message)
       return res.status(500).json({ message: error.message })
     }
   }

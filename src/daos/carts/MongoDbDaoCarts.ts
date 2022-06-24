@@ -1,6 +1,7 @@
 import MongoDbContainer from '../../containers/MongoDbContainer'
 import { Cart } from '../../models/carts'
 import { IProductMongo } from '../../interfaces/Product'
+import { logger } from '../../app'
 
 export default class MongoDbDaoCarts extends MongoDbContainer {
   constructor(config: string) {
@@ -12,7 +13,7 @@ export default class MongoDbDaoCarts extends MongoDbContainer {
     const newCartModel = new Cart()
     await newCartModel.save((err, cart) => {
       if (err) {
-        console.log(err)
+        logger.error(err)
       }
       cart.products = newProducts
       cart.save()
