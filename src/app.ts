@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import express from 'express'
-import { fork } from 'child_process'
+// import { fork } from 'child_process'
 import CartsRoute from './routes/CartsRoute'
 import ProductsRoute from './routes/ProductsRoute'
 import compression from 'compression'
@@ -14,7 +14,6 @@ import winston from 'winston'
 const app = express()
 
 export const logger = winston.createLogger({
-  level: 'warn',
   transports: [
     new winston.transports.Console({ level: 'info' }),
     new winston.transports.File({ filename: 'warn.log', level: 'warn' }),
@@ -122,6 +121,7 @@ app.post(
 )
 
 app.get('/failregister', (_req, res) => {
+  logger.info('Fallo al registrar usuario')
   res.render('failregister')
 })
 
@@ -138,6 +138,7 @@ app.post(
 )
 
 app.get('/faillogin', (_req, res) => {
+  logger.info('Fallo al iniciar sesión')
   res.render('faillogin')
 })
 
@@ -146,6 +147,7 @@ app.get('/logout', (req: any, res) => {
     const { username } = req.user
     return req.logOut((err) => {
       if (err) {
+        logger.error(err)
         return res.redirect('/login')
       }
       return res.render('logout', { username })
@@ -154,18 +156,19 @@ app.get('/logout', (req: any, res) => {
   res.redirect('/login')
 })
 
-app.get('*', (_req, res) => {
-  logger.warn('Ruta no existente')
-  res.send('Ruta no existente')
-})
-
 app.get('/api/randoms', (req, res) => {
   const { cant } = req.query
-  const calculation = fork('./src/calculation.js')
-  calculation.send({ cant })
-  calculation.on('message', (numbers) => {
-    res.json(numbers)
-  })
+  const parseCant: number = Number(cant) || 100000
+  const numbers: number[] = []
+
+  for (let i = 0; i < parseCant; i++) {
+    numbers.push(Math.floor(Math.random() * 1000))
+  }
+  //const calculation = fork('./src/calculation.js')
+  //calculation.send({ cant })
+  //calculation.on('message', (numbers) => {
+  res.json(numbers)
 })
+//})
 
 export default app

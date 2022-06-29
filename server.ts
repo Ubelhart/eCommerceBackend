@@ -2,25 +2,32 @@ import app from './src/app'
 import parseArgs from 'minimist'
 import cluster from 'cluster'
 import os from 'os'
+import { logger } from './src/app'
 const numCPUs = os.cpus().length
 const port = parseArgs(process.argv.slice(2))
 const mode = parseArgs(process.argv.slice(3))
 
 const PORT = port._[0] || 8080
 
+const info = {
+  'Argumentos de entrada': process.argv,
+  'Nombre de la plataforma: ': process.platform,
+  'Versión de Node: ': process.version,
+  'Memoria total reservada': process.memoryUsage().heapTotal,
+  'Path de ejecución': process.execPath,
+  'Process id': process.pid,
+  'Número de procesadores presentes en el servidor':
+    mode._[0] === 'CLUSTER' ? numCPUs : 1,
+  'Carpeta del proyecto': __dirname
+}
+
 app.get('/info', (_req, res) => {
-  const info = {
-    'Argumentos de entrada': process.argv,
-    'Nombre de la plataforma: ': process.platform,
-    'Versión de Node: ': process.version,
-    'Memoria total reservada': process.memoryUsage().heapTotal,
-    'Path de ejecución': process.execPath,
-    'Process id': process.pid,
-    'Número de procesadores presentes en el servidor':
-      mode._[0] === 'CLUSTER' ? numCPUs : 1,
-    'Carpeta del proyecto': __dirname
-  }
   res.json(info)
+})
+
+app.get('*', (_req, res) => {
+  logger.warn('Ruta no existente')
+  res.send('Ruta no existente')
 })
 
 if (mode._[0] === 'CLUSTER') {
