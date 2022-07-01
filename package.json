@@ -9,7 +9,7 @@
     "watch:server": "nodemon .",
     "build": "webpack",
     "lint": "ts-standard",
-    "start": "0x .",
+    "start": "node .",
     "watch": "npm-run-all --parallel watch:build watch:server"
   },
   "keywords": [],

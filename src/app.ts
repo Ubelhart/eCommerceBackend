@@ -108,6 +108,10 @@ passport.deserializeUser((id, done) => {
   })
 })
 
+app.get('/', (__req, res) => {
+  res.send('Probando Heroku')
+})
+
 app.get('/register', (_req, res) => {
   res.render('register')
 })

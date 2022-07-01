@@ -7,7 +7,7 @@ const numCPUs = os.cpus().length
 const port = parseArgs(process.argv.slice(2))
 const mode = parseArgs(process.argv.slice(3))
 
-const PORT = port._[0] || 8080
+const PORT = process.env.PORT || port._[0] || 8080
 
 const info = {
   'Argumentos de entrada': process.argv,
@@ -18,7 +18,8 @@ const info = {
   'Process id': process.pid,
   'Número de procesadores presentes en el servidor':
     mode._[0] === 'CLUSTER' ? numCPUs : 1,
-  'Carpeta del proyecto': __dirname
+  'Carpeta del proyecto': __dirname,
+  Port: PORT
 }
 
 app.get('/info', (_req, res) => {
