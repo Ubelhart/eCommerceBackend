@@ -22,6 +22,7 @@ export interface ICartFire {
 }
 
 export interface ICartMongo {
+  username: string
   _id: string
   timestamp: string
   products: IProductMongo[]

@@ -2,7 +2,7 @@ import app from './src/app'
 import parseArgs from 'minimist'
 import cluster from 'cluster'
 import os from 'os'
-import { logger } from './src/app'
+import logger from './src/utils/logger'
 const numCPUs = os.cpus().length
 const port = parseArgs(process.argv.slice(2))
 const mode = parseArgs(process.argv.slice(3))

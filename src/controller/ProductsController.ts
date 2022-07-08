@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { daoProducts } from '../daos'
-import { logger } from '../app'
+import logger from '../utils/logger'
 
 export default class ProductsController {
   constructor() {

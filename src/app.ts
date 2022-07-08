@@ -1,115 +1,35 @@
 import 'dotenv/config'
-import express from 'express'
-// import { fork } from 'child_process'
+import { app, passport } from './utils/passport'
 import CartsRoute from './routes/CartsRoute'
 import ProductsRoute from './routes/ProductsRoute'
 import compression from 'compression'
-import session from 'express-session'
-import passport from 'passport'
-import { Strategy as LocalStrategy } from 'passport-local'
-import bcrypt from 'bcrypt'
-import User from './models/users'
-import winston from 'winston'
+import logger from './utils/logger'
+/*
+import multer from 'multer'
 
-const app = express()
-
-export const logger = winston.createLogger({
-  transports: [
-    new winston.transports.Console({ level: 'info' }),
-    new winston.transports.File({ filename: 'warn.log', level: 'warn' }),
-    new winston.transports.File({ filename: 'error.log', level: 'error' })
-  ]
+const storage = multer.diskStorage({
+  destination: (_req, _file, cb) => {
+    cb(null, './uploads')
+  },
+  filename: (_req, file, cb) => {
+    cb(null, file.originalname)
+  }
 })
+const upload = multer({ storage: storage }) 
+*/
 
 app.use(compression())
 app.use('/api/carrito', new CartsRoute().router)
 app.use('/api/productos', new ProductsRoute().router)
-app.use(
-  session({
-    secret: 'secreto',
-    cookie: { httpOnly: false, secure: false, maxAge: 1000 * 600 },
-    rolling: true,
-    resave: true,
-    saveUninitialized: false
-  })
-)
-app.use(passport.initialize())
-app.use(passport.session())
 
 app.set('views', './views')
 app.set('view engine', 'ejs')
 
-function isValidPassword(user, password) {
-  return bcrypt.compareSync(password, user.password)
-}
-
-passport.use(
-  'login',
-  new LocalStrategy((username, password, done) => {
-    User.findOne({ username: username }, (err, user) => {
-      if (err) {
-        return done(err)
-      }
-      if (!user) {
-        console.log('Usuario no encontrado')
-        return done(null, false)
-      }
-      if (!isValidPassword(user, password)) {
-        console.log('Contraseña incorrecta')
-        return done(null, false)
-      }
-      return done(null, user)
-    })
-  })
-)
-
-function createHash(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
-}
-
-passport.use(
-  'signup',
-  new LocalStrategy(
-    { passReqToCallback: true },
-    (_req, username, password, done) => {
-      User.findOne({ username: username }, (err, user) => {
-        if (err) {
-          return done(err)
-        }
-        if (user) {
-          console.log('Usuario ya existe')
-          return done(null, false)
-        }
-        const newUser = new User({
-          username: username,
-          password: createHash(password)
-        })
-        newUser.save((err) => {
-          if (err) {
-            return done(err)
-          }
-          return done(null, newUser)
-        })
-      })
-    }
-  )
-)
-
-passport.serializeUser(({ _id }, done) => {
-  done(null, _id)
-})
-
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    if (err) {
-      return done(err)
-    }
-    return done(null, user)
-  })
-})
-
-app.get('/', (__req, res) => {
-  res.send('Probando Heroku')
+app.get('/', (req: any, res) => {
+  if (req.user) {
+    return res.json(req.user)
+  }
+  return res.redirect('/login')
 })
 
 app.get('/register', (_req, res) => {
@@ -122,6 +42,7 @@ app.post(
     successRedirect: '/login',
     failureRedirect: '/failregister'
   })
+  //upload.single('avatar')
 )
 
 app.get('/failregister', (_req, res) => {
@@ -168,11 +89,7 @@ app.get('/api/randoms', (req, res) => {
   for (let i = 0; i < parseCant; i++) {
     numbers.push(Math.floor(Math.random() * 1000))
   }
-  //const calculation = fork('./src/calculation.js')
-  //calculation.send({ cant })
-  //calculation.on('message', (numbers) => {
   res.json(numbers)
 })
-//})
 
 export default app
