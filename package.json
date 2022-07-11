@@ -46,6 +46,7 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "sqlite3": "^5.0.6",
+    "twilio": "^3.78.0",
     "winston": "^3.8.0"
   },
   "eslintConfig": {

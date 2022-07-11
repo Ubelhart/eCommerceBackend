@@ -1,5 +1,9 @@
 import { Response } from 'express'
 import { daoCarts } from '../daos/'
+import {
+  sendWhatsappMessageToAdmin,
+  sendWhatsappMessageToCustomer
+} from '../utils/twilio'
 
 export default class CartsController {
   constructor() {
@@ -14,8 +18,9 @@ export default class CartsController {
     if (req.user) {
       try {
         const newCart = await daoCarts.postCart(req.body, req.user)
-        const postedCart = await daoCarts.getCart(newCart.id, req.user)
-        if (postedCart) {
+        if (newCart) {
+          await sendWhatsappMessageToAdmin(req.user.username)
+          await sendWhatsappMessageToCustomer(req.user.phoneNumber)
           return res.json(`El carrito con el id:${newCart.id} ha sido agregado`)
         }
         return res.json({ error: 'no se pudo agregar el carrito' })
