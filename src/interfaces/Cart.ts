@@ -1,29 +1,29 @@
 import {
-  IProductFile,
-  IProductSql,
-  IProductFire,
-  IProductMongo
+    IProductFile,
+    IProductSql,
+    IProductFire,
+    IProductMongo
 } from './Product'
 
 export interface ICartFile {
-  id: number
-  timestamp: string
-  products: IProductFile[]
+    id: number
+    timestamp: string
+    products: IProductFile[]
 }
 
 export interface ICartSql extends Omit<ICartFile, 'products'> {
-  products: IProductSql[]
+    products: IProductSql[]
 }
 
 export interface ICartFire {
-  id: string
-  timestamp: string
-  products: IProductFire[]
+    id: string
+    timestamp: string
+    products: IProductFire[]
 }
 
 export interface ICartMongo {
-  username: string
-  _id: string
-  timestamp: string
-  products: IProductMongo[]
+    username: string
+    _id: string
+    timestamp: string
+    products: IProductMongo[]
 }

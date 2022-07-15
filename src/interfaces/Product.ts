@@ -1,21 +1,21 @@
 export interface IProductFile {
-  title: string
-  description: string
-  thumbnail: string
-  price: number
-  stock: number
-  id: number
-  timestamp: string
+    title: string
+    description: string
+    thumbnail: string
+    price: number
+    stock: number
+    id: number
+    timestamp: string
 }
 
 export interface IProductSql extends IProductFile {
-  cart_id: number
+    cart_id: number
 }
 
 export interface IProductFire extends Omit<IProductFile, 'id'> {
-  id: string
+    id: string
 }
 
 export interface IProductMongo extends Omit<IProductFile, 'id'> {
-  _id: string
+    _id: string
 }
