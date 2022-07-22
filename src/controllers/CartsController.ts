@@ -1,9 +1,12 @@
+import 'dotenv/config'
 import { Response } from 'express'
-import { daoCarts } from '../daos/'
 import {
     sendWhatsappMessageToAdmin,
     sendWhatsappMessageToCustomer
 } from '../utils/twilio'
+import Factory from '../factory'
+const factory = Factory.getInstance()
+const daoCarts = factory.create(process.env.DB, 'carts')
 
 export default class CartsController {
     constructor() {

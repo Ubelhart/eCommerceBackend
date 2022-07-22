@@ -1,5 +1,5 @@
 import { Router, json, urlencoded } from 'express'
-import CartsController from '../controller/CartsController'
+import CartsController from '../controllers/CartsController'
 const router = Router()
 
 export default class CartsRoute {

@@ -1,6 +1,9 @@
+import 'dotenv/config'
 import { Request, Response } from 'express'
-import { daoProducts } from '../daos'
 import logger from '../utils/logger'
+import Factory from '../factory'
+const factory = Factory.getInstance()
+const daoProducts = factory.create(process.env.DB, 'products')
 
 export default class ProductsController {
     constructor() {

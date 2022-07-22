@@ -1,3 +1,4 @@
+/*
 import 'dotenv/config'
 import { mongoDbKey, mariadb, sqlite3, serviceAccount } from '../config'
 let daoCarts
@@ -55,3 +56,4 @@ switch (process.env.DB) {
 }
 
 export { daoCarts, daoProducts }
+*/

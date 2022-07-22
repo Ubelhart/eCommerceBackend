@@ -1,5 +1,5 @@
 import { Router, json, urlencoded } from 'express'
-import ProductsController from '../controller/ProductsController'
+import ProductsController from '../controllers/ProductsController'
 import isAdmin from '../utils/auth'
 const router = Router()
 
