@@ -4,9 +4,8 @@ import {
     sendWhatsappMessageToAdmin,
     sendWhatsappMessageToCustomer
 } from '../utils/twilio'
-import Factory from '../factory'
-const factory = Factory.getInstance()
-const daoCarts = factory.create(process.env.DB, 'carts')
+import CartsService from '../services/CartsService'
+const cartsService = new CartsService()
 
 export default class CartsController {
     constructor() {
@@ -20,7 +19,7 @@ export default class CartsController {
     public async postCart(req: any, res: Response) {
         if (req.user) {
             try {
-                const newCart = await daoCarts.postCart(req.body, req.user)
+                const newCart = await cartsService.postCart(req.body, req.user)
                 if (newCart) {
                     await sendWhatsappMessageToAdmin(req.user.username)
                     await sendWhatsappMessageToCustomer(req.user.phoneNumber)
@@ -41,11 +40,13 @@ export default class CartsController {
     public async deleteCart(req: any, res: Response) {
         if (req.user) {
             try {
-                const cart = await daoCarts.getCart(req.params.id, req.user)
-                if (cart) {
-                    await daoCarts.deleteCart(cart, req.user)
+                const deletedCart = await cartsService.deleteCart(
+                    req.params,
+                    req.user
+                )
+                if (deletedCart) {
                     return res.json(
-                        `El carrito con el id:${cart.id} ha sido eliminado`
+                        `El carrito con el id:${deletedCart.id} ha sido eliminado`
                     )
                 }
                 return res.json({
@@ -63,7 +64,7 @@ export default class CartsController {
     public async getCart(req: any, res: Response) {
         if (req.user) {
             try {
-                const cart = await daoCarts.getCart(req.params.id, req.user)
+                const cart = await cartsService.deleteCart(req.params, req.user)
                 if (cart) {
                     return res.json(cart)
                 }
@@ -80,24 +81,18 @@ export default class CartsController {
     public async postProduct(req: any, res: Response) {
         if (req.user) {
             try {
-                const cart = await daoCarts.getCart(req.params.id, req.user)
-                if (cart) {
-                    const newProduct = await daoCarts.postProduct(
-                        cart,
-                        req.body,
-                        req.user
+                const newProduct = await cartsService.postProduct(
+                    req.params,
+                    req.body,
+                    req.user
+                )
+                if (newProduct) {
+                    return res.json(
+                        `El producto con el id:${newProduct.id} ha sido agregado`
                     )
-                    if (newProduct) {
-                        return res.json(
-                            `El producto con el id:${newProduct.id} ha sido agregado`
-                        )
-                    }
-                    return res.json({
-                        error: `el producto no pudo ser agregado al carrito con el id:${req.params.id}`
-                    })
                 }
                 return res.json({
-                    error: `el carrito con el id:${req.params.id} no existe`
+                    error: `el producto no pudo ser agregado al carrito con el id:${req.params.id}`
                 })
             } catch (error: any) {
                 return res.status(500).json({ error: error.message })
@@ -111,24 +106,17 @@ export default class CartsController {
     public async deleteProduct(req: any, res: Response) {
         if (req.user) {
             try {
-                const cart = await daoCarts.getCart(req.params.id, req.user)
-                if (cart) {
-                    const deletedProduct = await daoCarts.deleteProduct(
-                        cart,
-                        req.params.id_prod,
-                        req.user
+                const deletedProduct = await cartsService.deleteProduct(
+                    req.params,
+                    req.user
+                )
+                if (deletedProduct) {
+                    return res.json(
+                        `El producto con el id:${deletedProduct.id} ha sido eliminado`
                     )
-                    if (deletedProduct) {
-                        return res.json(
-                            `El producto con el id:${deletedProduct.id} ha sido eliminado`
-                        )
-                    }
-                    return res.json({
-                        error: `el producto con el id:${req.params.id_prod} no existe en el carrito con el id:${req.params.id}`
-                    })
                 }
                 return res.json({
-                    error: `el carrito con el id:${req.params.id}`
+                    error: `el producto con el id:${req.params.id_prod} no existe en el carrito con el id:${req.params.id}`
                 })
             } catch (error: any) {
                 return res.status(500).json({ error: error.message })

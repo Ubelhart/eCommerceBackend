@@ -7,6 +7,10 @@ export default class MongoDbDaoProducts extends MongoDbContainer {
         super(config)
     }
 
+    public async getProduct(id: string) {
+        return await Product.findById(id)
+    }
+
     public async getProducts() {
         return await Product.find({})
     }
@@ -14,10 +18,6 @@ export default class MongoDbDaoProducts extends MongoDbContainer {
     public async postProduct(newProduct: IProductMongo) {
         const newProductModel = new Product(newProduct)
         return await newProductModel.save()
-    }
-
-    public async getProduct(id: string) {
-        return await Product.findById(id)
     }
 
     public async putProduct(id: string, updatedProduct: IProductMongo) {

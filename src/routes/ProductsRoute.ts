@@ -10,7 +10,7 @@ export default class ProductsRoute {
         router.use(json())
         router.use(urlencoded({ extended: true }))
 
-        router.get('/:id?', this.productsController.getProducts)
+        router.get('/:id?', this.productsController.getProduct)
         router.post('/', isAdmin, this.productsController.postProduct)
         router.put('/:id', isAdmin, this.productsController.putProduct)
         router.delete('/:id', isAdmin, this.productsController.deleteProduct)

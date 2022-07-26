@@ -1,33 +1,18 @@
 import MongoDbContainer from '../../containers/MongoDbContainer'
 import { Cart } from '../../models/carts'
 import { IProductMongo } from '../../interfaces/Product'
-import logger from '../../utils/logger'
 export default class MongoDbDaoCarts extends MongoDbContainer {
     constructor(config: string) {
         super(config)
         this.connect()
     }
 
-    public async postCart(
-        newProducts: IProductMongo[],
-        { username }: { username: string }
-    ) {
+    public async postCart(newCart) {
         const newCartModel = new Cart()
-        await newCartModel.save((err, cart) => {
-            if (err) {
-                logger.error(err)
-            }
-            cart.username = username
-            cart.products = newProducts
-            cart.save()
-        })
-        return newCartModel
+        return await newCartModel.save(newCart)
     }
 
-    public async deleteCart(
-        { id }: { id: string },
-        { username }: { username: string }
-    ) {
+    public async deleteCart(id, username) {
         await Cart.findOneAndDelete({ _id: id, username })
     }
 
@@ -40,19 +25,11 @@ export default class MongoDbDaoCarts extends MongoDbContainer {
         newProduct: IProductMongo,
         { username }: { username: string }
     ) {
-        let product
-        await Cart.findOneAndUpdate(
+        return await Cart.findOneAndUpdate(
             { _id: id, username },
             { $push: { products: newProduct } },
             { new: true }
-        ).then((cart) => {
-            if (cart) {
-                product = cart.products.find(
-                    (product: IProductMongo) => product._id == newProduct._id
-                )
-            }
-        })
-        return product
+        )
     }
 
     public async deleteProduct(
@@ -60,19 +37,11 @@ export default class MongoDbDaoCarts extends MongoDbContainer {
         id_prod: string,
         { username }: { username: string }
     ) {
-        let deletedProduct
-        await Cart.findOneAndUpdate(
+        return await Cart.findOneAndUpdate(
             { _id: id, username },
             {
                 $pull: { products: { _id: id_prod } }
             }
-        ).then((cart) => {
-            if (cart) {
-                deletedProduct = cart.products.find(
-                    (product: IProductMongo) => product._id == id_prod
-                )
-            }
-        })
-        return deletedProduct
+        )
     }
 }
