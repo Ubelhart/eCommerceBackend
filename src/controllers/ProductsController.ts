@@ -66,7 +66,6 @@ export default class ProductsController {
     public async deleteProduct(req: Request, res: Response) {
         try {
             const product = await productsService.deleteProduct(req.params.id)
-
             if (product) {
                 return res.json(
                     `El producto con el id:${product.id} ha sido eliminado`

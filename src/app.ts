@@ -5,6 +5,7 @@ import compression from 'compression'
 import express from 'express'
 import session from 'express-session'
 import passport from './utils/passport'
+import cors from 'cors'
 const app = express()
 /*
 import multer from 'multer'
@@ -34,6 +35,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(compression())
+app.use(cors())
 app.use('/api/carrito', new CartsRoute().router)
 app.use('/api/productos', new ProductsRoute().router)
 

@@ -1,6 +1,5 @@
 import { Router, json, urlencoded } from 'express'
 import ProductsController from '../controllers/ProductsController'
-import isAdmin from '../utils/auth'
 const router = Router()
 
 export default class ProductsRoute {
@@ -11,8 +10,8 @@ export default class ProductsRoute {
         router.use(urlencoded({ extended: true }))
 
         router.get('/:id?', this.productsController.getProduct)
-        router.post('/', isAdmin, this.productsController.postProduct)
-        router.put('/:id', isAdmin, this.productsController.putProduct)
-        router.delete('/:id', isAdmin, this.productsController.deleteProduct)
+        router.post('/', this.productsController.postProduct)
+        router.put('/:id', this.productsController.putProduct)
+        router.delete('/:id', this.productsController.deleteProduct)
     }
 }

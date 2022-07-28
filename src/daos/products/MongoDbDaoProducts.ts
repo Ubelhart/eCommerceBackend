@@ -24,7 +24,7 @@ export default class MongoDbDaoProducts extends MongoDbContainer {
         return await Product.findByIdAndUpdate(id, updatedProduct)
     }
 
-    public async deleteProduct({ id }: { id: string }) {
+    public async deleteProduct(id: string) {
         return await Product.findByIdAndRemove(id)
     }
 }
