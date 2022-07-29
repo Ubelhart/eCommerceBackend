@@ -1,15 +1,20 @@
 const axios = require('axios')
+const chai = require('chai')
+const assert = chai.assert
 
 async function getProduct(id) {
     const response = await axios.get(
         `http://localhost:8080/api/productos/${id}`
     )
     console.log(response.data)
+    return response.data
 }
 
-async function getProducts(id) {
+async function getProducts() {
     const response = await axios.get(`http://localhost:8080/api/productos`)
     console.log(response.data)
+
+    return response.data
 }
 
 async function postProduct(id) {
@@ -54,4 +59,15 @@ async function deleteProduct(id) {
     }
 }
 
-putProduct('62e20cc028ad071a02499401')
+describe('Testeando get en la ruta de productos', () => {
+    it('Debería devolver un array de productos', async () => {
+        const products = await getProducts()
+        assert.isArray(products)
+    })
+})
+
+describe('Testeando get en la ruta de productos:id?', () => {
+    it('Debería devolver un producto', async () => {
+        const product = await getProduct('62e20cc028ad071a02499401')
+    })
+})
