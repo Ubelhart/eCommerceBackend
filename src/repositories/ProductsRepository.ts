@@ -6,7 +6,11 @@ const daoProducts = factory.create(process.env.DB, 'products')
 class ProductsRepository {
     constructor() {}
     public async getProduct(id) {
-        if (id) {
+        const categories = ['Madera', 'Plástico']
+
+        if (categories.includes(id)) {
+            return await daoProducts.getProductsByCategory(id)
+        } else if (id) {
             return await daoProducts.getProduct(id)
         }
         return await daoProducts.getProducts()

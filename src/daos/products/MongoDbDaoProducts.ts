@@ -15,6 +15,10 @@ export default class MongoDbDaoProducts extends MongoDbContainer {
         return await Product.find({})
     }
 
+    public async getProductsByCategory(category: string) {
+        return await Product.find({ category })
+    }
+
     public async postProduct(newProduct: IProductMongo) {
         const newProductModel = new Product(newProduct)
         return await newProductModel.save()

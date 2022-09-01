@@ -5,14 +5,25 @@ import logger from '../utils/logger'
 export const numCPUs = os.cpus().length
 const port = parseArgs(process.argv.slice(2))
 export const mode = parseArgs(process.argv.slice(3))
+import Factory from '../factory'
+const factory = Factory.getInstance()
+const daoMessages = factory.create(process.env.DB, 'messages')
 
 export const PORT = process.env.PORT || port._[0] || 8080
 
 app.get('/', (req: any, res) => {
     if (req.user) {
-        return res.json(req.user)
+        return res.redirect('/api/productos')
     }
     return res.redirect('/login')
+})
+
+app.get('/chat', (_req, res) => {
+    res.render('chat')
+})
+
+app.get('/chat/:email', async (req, res) => {
+    res.json(await daoMessages.getMessage(req.params.email))
 })
 
 app.get('/api/randoms', (req, res) => {

@@ -1,6 +1,7 @@
 export interface IProductFile {
     title: string
     description: string
+    category: string
     thumbnail: string
     price: number
     stock: number

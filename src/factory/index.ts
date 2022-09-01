@@ -7,6 +7,7 @@ import MongoDbDaoCarts from '../daos/carts/MongoDbDaoCarts'
 import MongoDbDaoProducts from '../daos/products/MongoDbDaoProducts'
 import Sqlite3DaoCarts from '../daos/carts/Sqlite3DaoCarts'
 import MariaDbDaoProducts from '../daos/products/MariaDbDaoProducts'
+import MongoDbDaoMessages from '../daos/messages/MongoDbDaoMessages'
 let dao
 let instance
 
@@ -20,6 +21,9 @@ export class Factory {
                         break
                     case 'products':
                         dao = new MongoDbDaoProducts(mongoDbKey)
+                        break
+                    case 'messages':
+                        dao = new MongoDbDaoMessages(mongoDbKey)
                 }
                 return dao
             case 'firebase':

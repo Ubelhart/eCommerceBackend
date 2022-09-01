@@ -1,4 +1,4 @@
-import app from './src/app'
+import httpServer from './src/utils/chat'
 import cluster from 'cluster'
 import { mode, numCPUs, PORT } from './src/routes/routes'
 
@@ -12,14 +12,14 @@ if (mode._[0] === 'CLUSTER') {
             console.log(`worker ${worker.process.pid} died`)
         })
     } else {
-        app.listen(PORT, () => {
+        httpServer.listen(PORT, () => {
             console.log(`Servidor corriendo en http://localhost:${PORT}`)
         })
 
         console.log(`Worker ${process.pid} started`)
     }
 } else {
-    app.listen(PORT, () => {
+    httpServer.listen(PORT, () => {
         console.log(`Servidor corriendo en http://localhost:${PORT}`)
     })
 }

@@ -1,0 +1,1153 @@
+{
+	"info": {
+		"_postman_id": "53727331-42c0-40d0-8c7f-aee11fa22583",
+		"name": "eCommerceBackend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "MongoDb",
+			"item": [
+				{
+					"name": "productos",
+					"item": [
+						{
+							"name": "localhost:8080/api/productos",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos/",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos/:id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos/6267973e81070a6424aac69b",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										"6267973e81070a6424aac69b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos/:categoria",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/productos/Plástico",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										"Plástico"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "true",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Globo Terráqueo\",\r\n    \"description\": \"Globo terráqueo de plástico\",\r\n    \"category\": \"Plástico\",\r\n    \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png\",\r\n    \"price\": 345.67,\r\n    \"stock\": 30,\r\n    \"timestamp\": \"2022-04-26T07:24:02.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos/:id",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "true",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Escuadr\",\r\n    \"description\": \"Escuadra de madera\",\r\n    \"category\": \"Madera\",\r\n    \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\",\r\n    \"price\": 123.45,\r\n    \"stock\": 10,\r\n    \"timestamp\": \"2022-04-26T06:54:54.216Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos/6267973e81070a6424aac69b",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										"6267973e81070a6424aac69b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos/:id",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "true",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/productos/62686c7acd51a6e6d7a1a499",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										"62686c7acd51a6e6d7a1a499"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "carrito",
+					"item": [
+						{
+							"name": "localhost:8080/login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"juanpabloubelhart@hotmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/login",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "true",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"_id\": \"6267973e81070a6424aac69b\",\r\n        \"title\": \"Escuadra\",\r\n        \"description\": \"Escuadra de madera\",\r\n        \"category\": \"Madera\",\r\n        \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\",\r\n        \"price\": 123.45,\r\n        \"stock\": 10,\r\n        \"timestamp\": \"2022-04-26T06:54:54.216Z\",\r\n        \"__v\": 0\r\n    },\r\n    {\r\n        \"_id\": \"626797ee81070a6424aac69d\",\r\n        \"title\": \"Calculadora\",\r\n        \"description\": \"Calculadora de plástico\",\r\n        \"category\": \"Plástico\",\r\n        \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png\",\r\n        \"price\": 234.56,\r\n        \"stock\": 20,\r\n        \"timestamp\": \"2022-04-26T06:57:50.870Z\",\r\n        \"__v\": 0\r\n    },\r\n    {\r\n        \"_id\": \"62679e11b008f460a91473cf\",\r\n        \"title\": \"Globo Terráqueo\",\r\n        \"description\": \"Globo terráqueo de plástico\",\r\n        \"category\": \"Plástico\",\r\n        \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png\",\r\n        \"price\": 345.67,\r\n        \"stock\": 30,\r\n        \"timestamp\": \"2022-04-26T07:24:02.000Z\",\r\n        \"__v\": 0\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/carrito",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/carrito/626b0e69ddb25078c8c675b9",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"626b0e69ddb25078c8c675b9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito/:id/productos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/carrito/62c781d5c0b41f3879ec8d8b/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"62c781d5c0b41f3879ec8d8b",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito/:id/productos",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"_id\": \"6267973e81070a6424aac69b\",\r\n    \"title\": \"Escuadra\",\r\n    \"description\": \"Escuadra de madera\",\r\n    \"category\": \"Madera\",\r\n    \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\",\r\n    \"price\": 123.45,\r\n    \"stock\": 10,\r\n    \"timestamp\": \"2022-04-26T06:54:54.216Z\",\r\n    \"__v\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/carrito/626b0d9cddb25078c8c675b1/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"626b0d9cddb25078c8c675b1",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito/:id/productos/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/carrito/626b0d9cddb25078c8c675b1/productos/626b0ef9ddb25078c8c675c5",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"626b0d9cddb25078c8c675b1",
+										"productos",
+										"626b0ef9ddb25078c8c675c5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Firebase",
+			"item": [
+				{
+					"name": "productos",
+					"item": [
+						{
+							"name": "localhost:8080/api/productos",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos/1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos/627a2d91aaff6e6e4c26532c",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										"627a2d91aaff6e6e4c26532c"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "true",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Globo Terráqueo\",\r\n    \"description\": \"Globo terráqueo de plástico\",\r\n    \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png\",\r\n    \"price\": 345.67,\r\n    \"stock\": 30\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos/1",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "true",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"Escuadr\",\r\n    \"description\":\"Escuadra de madera\",\r\n    \"thumbnail\":\"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\",\r\n    \"price\":123.45,\r\n    \"stock\":10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos/JaPV54zj5nhUcglgJvtZ",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										"JaPV54zj5nhUcglgJvtZ"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos/1",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "true",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/productos/JaPV54zj5nhUcglgJvtZ",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										"JaPV54zj5nhUcglgJvtZ"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "carrito",
+					"item": [
+						{
+							"name": "localhost:8080/api/carrito",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "true",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"id\": \"JtSwvGwREhxPnBNbf2LS\",\r\n        \"description\": \"Escuadra de madera\",\r\n        \"timestamp\": \"Wed Apr 27 2022 03:39:51 GMT-0300 (hora estándar de Argentina)\",\r\n        \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\",\r\n        \"stock\": 10,\r\n        \"price\": 123.45,\r\n        \"title\": \"Escuadra\"\r\n    },\r\n    {\r\n        \"id\": \"Wh3BkpZH3JMYW4vt75Ow\",\r\n        \"title\": \"Globo Terráqueo\",\r\n        \"stock\": 30,\r\n        \"timestamp\": \"Wed Apr 27 2022 02:09:19 GMT-0300 (hora estándar de Argentina)\",\r\n        \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png\",\r\n        \"description\": \"Globo terráqueo de plástico\",\r\n        \"price\": 345.67\r\n    },\r\n    {\r\n        \"id\": \"vZ3vZfltUk4DG5ZGqrrc\",\r\n        \"timestamp\": \"Wed Apr 27 2022 03:29:06 GMT-0300 (hora estándar de Argentina)\",\r\n        \"stock\": 20,\r\n        \"price\": 234.56,\r\n        \"title\": \"Calculadora\",\r\n        \"description\": \"Calculadora de plástico\",\r\n        \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png\"\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/carrito",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito/1",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/carrito/MgT23M3vkSzg2TmU7UUD",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"MgT23M3vkSzg2TmU7UUD"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito/1/productos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/carrito/mgLc1Vx5OBgci97vdZvZ/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"mgLc1Vx5OBgci97vdZvZ",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito/1/productos",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"stock\": 10,\r\n    \"price\": 123.45,\r\n    \"description\": \"Escuadra de madera\",\r\n    \"timestamp\": \"Wed Apr 27 2022 03:39:51 GMT-0300 (hora estándar de Argentina)\",\r\n    \"title\": \"Escuadra\",\r\n    \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\",\r\n    \"id\": \"JtSwvGwREhxPnBNbf2LS\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/carrito/mgLc1Vx5OBgci97vdZvZ/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"mgLc1Vx5OBgci97vdZvZ",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito/1/productos/1",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/carrito/mgLc1Vx5OBgci97vdZvZ/productos/JtSwvGwREhxPnBNbf2LS",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"mgLc1Vx5OBgci97vdZvZ",
+										"productos",
+										"JtSwvGwREhxPnBNbf2LS"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "MariaDbAndSqlite3",
+			"item": [
+				{
+					"name": "productos",
+					"item": [
+						{
+							"name": "localhost:8080/api/productos",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos/",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos/1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "true",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Calculadora\",\r\n    \"description\": \"Calculadora de plástico\",\r\n    \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png\",\r\n    \"price\": 234.56,\r\n    \"stock\": 20\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos/1",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "true",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"Escuadr\",\r\n    \"description\":\"Escuadra de madera\",\r\n    \"thumbnail\":\"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\",\r\n    \"price\":123.45,\r\n    \"stock\":10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/productos/19",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										"19"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/productos/1",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "true",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/productos/3",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"productos",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "carrito",
+					"item": [
+						{
+							"name": "localhost:8080/api/carrito",
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "true",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"id\": 1,\r\n        \"title\": \"Globo Terráqueo\",\r\n        \"description\": \"Globo terráqueo de plástico\",\r\n        \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png\",\r\n        \"price\": 345.67,\r\n        \"stock\": 30,\r\n        \"timestamp\": \"2022-04-29T00:52:27.000Z\"\r\n    },\r\n    {\r\n        \"id\": 2,\r\n        \"title\": \"Escuadra\",\r\n        \"description\": \"Escuadra de madera\",\r\n        \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\",\r\n        \"price\": 123.45,\r\n        \"stock\": 10,\r\n        \"timestamp\": \"2022-04-29T01:02:27.000Z\"\r\n    },\r\n    {\r\n        \"id\": 3,\r\n        \"title\": \"Calculadora\",\r\n        \"description\": \"Calculadora de plástico\",\r\n        \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png\",\r\n        \"price\": 234.56,\r\n        \"stock\": 20,\r\n        \"timestamp\": \"2022-04-29T01:03:17.000Z\"\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/carrito",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito/1",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/carrito/MgT23M3vkSzg2TmU7UUD",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"MgT23M3vkSzg2TmU7UUD"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito/1/productos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/carrito/4/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"4",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito/1/productos",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 2,\r\n    \"title\": \"Escuadra\",\r\n    \"description\": \"Escuadra de madera\",\r\n    \"thumbnail\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png\",\r\n    \"price\": 123.45,\r\n    \"stock\": 10,\r\n    \"timestamp\": \"2022-04-29T01:02:27.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/api/carrito/4/productos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"4",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:8080/api/carrito/1/productos/1",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/carrito/4/productos/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"carrito",
+										"4",
+										"productos",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
