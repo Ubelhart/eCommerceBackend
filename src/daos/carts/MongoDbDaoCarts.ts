@@ -8,22 +8,22 @@ export default class MongoDbDaoCarts extends MongoDbContainer {
     }
 
     public async postCart(newCart) {
-        const newCartModel = new Cart()
-        return await newCartModel.save(newCart)
+        const newCartModel = new Cart(newCart)
+        return await newCartModel.save()
     }
 
     public async deleteCart(id, username) {
         await Cart.findOneAndDelete({ _id: id, username })
     }
 
-    public async getCart(id: string, { username }: { username: string }) {
+    public async getCart(id: string, username) {
         return await Cart.findOne({ _id: id, username })
     }
 
     public async postProduct(
         { id }: { id: string },
         newProduct: IProductMongo,
-        { username }: { username: string }
+        username
     ) {
         return await Cart.findOneAndUpdate(
             { _id: id, username },
@@ -35,7 +35,7 @@ export default class MongoDbDaoCarts extends MongoDbContainer {
     public async deleteProduct(
         { id }: { id: string },
         id_prod: string,
-        { username }: { username: string }
+        username
     ) {
         return await Cart.findOneAndUpdate(
             { _id: id, username },

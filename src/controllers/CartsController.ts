@@ -64,7 +64,7 @@ export default class CartsController {
     public async getCart(req: any, res: Response) {
         if (req.user) {
             try {
-                const cart = await cartsService.deleteCart(req.params, req.user)
+                const cart = await cartsService.getCart(req.params, req.user)
                 if (cart) {
                     return res.json(cart)
                 }
